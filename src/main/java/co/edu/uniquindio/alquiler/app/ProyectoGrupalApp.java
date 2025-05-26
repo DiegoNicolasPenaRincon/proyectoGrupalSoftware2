@@ -6,24 +6,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AlquilaFacilApp extends Application {
+public class ProyectoGrupalApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(AlquilaFacilApp.class.getResource("/ventanas/IngresarSAC.fxml"));
+        FXMLLoader loader = new FXMLLoader(ProyectoGrupalApp.class.getResource("/ventanas/Compra.fxml"));
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Ingresar SAC");
+        stage.setTitle("Comprar");
         stage.show();
 
 
     }
 
     public static void main(String[] args) {
-        launch(AlquilaFacilApp.class, args);
+        launch(ProyectoGrupalApp.class, args);
     }
 
 }
