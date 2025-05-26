@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="Compra" prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
+<AnchorPane prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
    <children>
       <TableView fx:id="productosTable" layoutX="78.0" layoutY="77.0" prefHeight="200.0" prefWidth="676.0">
         <columns>
@@ -24,6 +30,9 @@
       <Label fx:id="descripcionLabel" layoutX="845.0" layoutY="51.0" text="Descripcion" />
       <TextArea fx:id="descripcionTxtArea" layoutX="754.0" layoutY="77.0" prefHeight="318.0" prefWidth="257.0" />
       <Button fx:id="agregarCarritoButton" layoutX="362.0" layoutY="314.0" mnemonicParsing="false" onAction="#agregarCarritoOnAction" text="Agregar al carrito" />
-      <Button layoutX="174.0" layoutY="383.0" mnemonicParsing="false" text="Button" />
+      <ImageView fx:id="carritoComprasImageView" fitHeight="71.0" fitWidth="80.0" layoutX="174.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="Imagenes/carritoCompras.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>

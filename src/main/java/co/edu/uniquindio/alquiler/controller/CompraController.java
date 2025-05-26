@@ -9,10 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class CompraController {
 
+    @FXML
+    private ImageView carritoComprasImageView;
     @FXML
     private TableView<Producto> productosTable;
     @FXML
