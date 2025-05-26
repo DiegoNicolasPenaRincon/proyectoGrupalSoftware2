@@ -11,7 +11,7 @@ public class ProyectoGrupalApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(ProyectoGrupalApp.class.getResource("/ventanas/Compra.fxml"));
+        FXMLLoader loader = new FXMLLoader(ProyectoGrupalApp.class.getResource("/ventanas/Login.fxml"));
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent);

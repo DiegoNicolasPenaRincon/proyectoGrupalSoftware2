@@ -1,5 +1,8 @@
 package co.edu.uniquindio.alquiler.model;
 
+import co.edu.uniquindio.alquiler.exceptions.ContraseniaException;
+import co.edu.uniquindio.alquiler.exceptions.CorreoInvalidoException;
+
 import java.util.ArrayList;
 
 public class TiendaUQ {
@@ -20,6 +23,21 @@ public class TiendaUQ {
         }
 
         return tienda;
+    }
+
+    public Ciudadano verificarUsuario(String correo,String contrasenia) throws ContraseniaException {
+        for(int i=0;i<listaCiudadanos.size();i++)
+        {
+            if(listaCiudadanos.get(i).getEmail().equals(correo))
+            {
+               if(!listaCiudadanos.get(i).getContrasenia().equals(contrasenia))
+               {
+                   throw  new ContraseniaException("La contraseña es invalida");
+               }
+               return listaCiudadanos.get(i);
+            }
+        }
+        return null;
     }
 
     public ArrayList<Ciudadano> getListaCiudadanos() {

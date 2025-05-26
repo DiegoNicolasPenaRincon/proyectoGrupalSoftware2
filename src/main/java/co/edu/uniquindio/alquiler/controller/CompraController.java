@@ -43,6 +43,8 @@ public class CompraController {
     public TiendaUQ tienda= TiendaUQ.getInstance();
 
     public void initialize() {
+        descripcionTxtArea.setDisable(true);
+
         nombreColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombre()));
         codigoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getCodigo()));
         precioColumn.setCellValueFactory( cellData -> new SimpleStringProperty( String.valueOf(cellData.getValue().getPrecio()) ) );
@@ -55,6 +57,7 @@ public class CompraController {
             Producto producto=productosTable.getSelectionModel().getSelectedItem();
             if (newVal != null) {
                 this.categoriasTable.setItems(FXCollections.observableList(producto.getCategorias()));
+                this.descripcionTxtArea.setText(producto.getDescripcion());
             }
         });
 
