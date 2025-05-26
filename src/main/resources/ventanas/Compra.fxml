@@ -41,7 +41,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Spinner fx:id="cantidadSpinner" editable="true" layoutX="367.0" layoutY="289.0" />
+      <Spinner fx:id="cantidadSpinner" layoutX="367.0" layoutY="289.0" />
       <Label fx:id="cantidadLbl" layoutX="310.0" layoutY="293.0" text="Cantidad" />
    </children>
 </AnchorPane>
