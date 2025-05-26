@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="Compra" prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
+   <children>
+      <TableView fx:id="productosTable" layoutX="78.0" layoutY="77.0" prefHeight="200.0" prefWidth="676.0">
+        <columns>
+          <TableColumn fx:id="nombreColumn" prefWidth="81.0" text="Nombre" />
+          <TableColumn fx:id="codigoColumn" prefWidth="90.0" text="Codigo" />
+            <TableColumn fx:id="precioColumn" minWidth="0.0" prefWidth="100.0" text="Precio" />
+            <TableColumn fx:id="unidadesColumn" prefWidth="92.0" text="U.Disponibles" />
+            <TableColumn fx:id="iGarantiaolumn" prefWidth="127.0" text="Inicio de la garantia" />
+            <TableColumn fx:id="fGarantiaColumn" prefWidth="121.0" text="Fin de la garantia" />
+            <TableColumn fx:id="estadoColumn" prefWidth="64.0" text="Estado" />
+          <TableColumn prefWidth="242.0" text="Categorias" />
+        </columns>
+      </TableView>
+      <TableView fx:id="categoriasTable" layoutX="754.0" layoutY="395.0" prefHeight="200.0" prefWidth="257.0">
+         <columns>
+            <TableColumn fx:id="categoriaColumn" prefWidth="256.0" text="Categoria" />
+         </columns></TableView>
+      <Label fx:id="descripcionLabel" layoutX="845.0" layoutY="51.0" text="Descripcion" />
+      <TextArea fx:id="descripcionTxtArea" layoutX="754.0" layoutY="77.0" prefHeight="318.0" prefWidth="257.0" />
+      <Button fx:id="agregarCarritoButton" layoutX="362.0" layoutY="314.0" mnemonicParsing="false" onAction="#agregarCarritoOnAction" text="Agregar al carrito" />
+   </children>
+</AnchorPane>

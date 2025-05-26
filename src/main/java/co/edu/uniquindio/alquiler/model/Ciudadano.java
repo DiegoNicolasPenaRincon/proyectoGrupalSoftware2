@@ -11,4 +11,5 @@ public class Ciudadano {
     private String email;
     private String fechaNacimiento;
     private List<CatalogoPreferencia> catalogoDePreferenciasComprasCarrito;
+    private CarroCompra carrito;
 }
