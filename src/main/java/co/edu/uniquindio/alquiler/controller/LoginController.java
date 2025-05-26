@@ -7,10 +7,16 @@ import co.edu.uniquindio.alquiler.model.DatosSesion;
 import co.edu.uniquindio.alquiler.model.TiendaUQ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML
@@ -52,6 +58,8 @@ public class LoginController {
             else
             {
                 datos.setCiudadanoSeleccionado(ciudadano);
+                inicializarComprasInterfaz();
+
             }
         }
         catch (AtributoVacioException e)
@@ -61,7 +69,22 @@ public class LoginController {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void inicializarComprasInterfaz() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/Compra.fxml"));
+        Parent root = loader.load();
 
+        CompraController compras =loader.getController();
+
+        // Mostramos la nueva ventana
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 }

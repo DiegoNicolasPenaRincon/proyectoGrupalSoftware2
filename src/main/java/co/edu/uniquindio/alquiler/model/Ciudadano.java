@@ -10,7 +10,6 @@ public class Ciudadano {
     private String telefono;
     private String email;
     private String fechaNacimiento;
-    private List<CatalogoPreferencia> catalogoDePreferenciasComprasCarrito;
     private CarroCompra carrito;
     private String contrasenia;
 
@@ -62,14 +61,6 @@ public class Ciudadano {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<CatalogoPreferencia> getCatalogoDePreferenciasComprasCarrito() {
-        return catalogoDePreferenciasComprasCarrito;
-    }
-
-    public void setCatalogoDePreferenciasComprasCarrito(List<CatalogoPreferencia> catalogoDePreferenciasComprasCarrito) {
-        this.catalogoDePreferenciasComprasCarrito = catalogoDePreferenciasComprasCarrito;
-    }
-
     public CarroCompra getCarrito() {
         return carrito;
     }
@@ -83,6 +74,17 @@ public class Ciudadano {
     }
 
     public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Ciudadano(String nombre, String apellido, String telefono, String direccion, String email, String fechaNacimiento, String contrasenia) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.carrito = null;
         this.contrasenia = contrasenia;
     }
 }

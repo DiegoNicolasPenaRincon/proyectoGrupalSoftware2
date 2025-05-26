@@ -19,4 +19,9 @@ public class Categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Categoria(String nombre, String id) {
+        this.nombre = nombre;
+        this.id = id;
+    }
 }

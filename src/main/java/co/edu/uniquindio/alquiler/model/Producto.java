@@ -14,7 +14,6 @@ public class Producto {
     private double precio;
     private int stock;
     private ArrayList<Categoria> categorias;
-    private ArrayList<String> caracteristicas;
     private LocalDateTime garantiaInicio;
     private LocalDateTime garantiaFin;
     private EstadoProducto estado;
@@ -68,13 +67,6 @@ public class Producto {
         this.stock = stock;
     }
 
-    public ArrayList<String> getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public void setCaracteristicas(ArrayList<String> caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
 
     public LocalDateTime getGarantiaInicio() {
         return garantiaInicio;
@@ -114,5 +106,19 @@ public class Producto {
 
     public void setCategorias(ArrayList<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Producto(String id, String codigo, String nombre, String descripcion, double precio, int stock, LocalDateTime garantiaInicio, LocalDateTime garantiaFin, EstadoProducto estado) {
+        this.id = id;
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+        this.categorias = new ArrayList<>();
+        this.garantiaInicio = garantiaInicio;
+        this.garantiaFin = garantiaFin;
+        this.estado = estado;
+        this.detallesProducto = new ArrayList<>();
     }
 }

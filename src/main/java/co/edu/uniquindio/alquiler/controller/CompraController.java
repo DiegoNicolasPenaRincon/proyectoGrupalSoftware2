@@ -1,9 +1,7 @@
 package co.edu.uniquindio.alquiler.controller;
 
 import co.edu.uniquindio.alquiler.exceptions.AtributoVacioException;
-import co.edu.uniquindio.alquiler.model.Categoria;
-import co.edu.uniquindio.alquiler.model.Producto;
-import co.edu.uniquindio.alquiler.model.TiendaUQ;
+import co.edu.uniquindio.alquiler.model.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,8 +10,18 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.ArrayList;
+
 public class CompraController {
 
+    @FXML
+    private Spinner<Integer> cantidadSpinner;
+    @FXML
+    private Label cantidadLbl;
+    @FXML
+    private Label contadorElementosCarritoLbl;
+    @FXML
+    protected Button carrito;
     @FXML
     private ImageView carritoComprasImageView;
     @FXML
@@ -45,8 +53,14 @@ public class CompraController {
 
     public TiendaUQ tienda= TiendaUQ.getInstance();
 
+    public DatosSesion datos=DatosSesion.getInstance();
+
+    int elementosEnCarrito=0;
+
     public void initialize() {
         descripcionTxtArea.setDisable(true);
+        carrito=new Button("Click", carritoComprasImageView);
+
 
         nombreColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombre()));
         codigoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getCodigo()));
@@ -61,6 +75,11 @@ public class CompraController {
             if (newVal != null) {
                 this.categoriasTable.setItems(FXCollections.observableList(producto.getCategorias()));
                 this.descripcionTxtArea.setText(producto.getDescripcion());
+
+                SpinnerValueFactory<Integer> valueFactory =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, producto.getStock(),1);
+                cantidadSpinner.setValueFactory(valueFactory);
+
             }
         });
 
@@ -76,7 +95,9 @@ public class CompraController {
         {
             if(producto!=null)
             {
-
+                DetalleProducto detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,0.16* producto.getPrecio());
+                datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
+                contadorElementosCarritoLbl
             }
             else
             {

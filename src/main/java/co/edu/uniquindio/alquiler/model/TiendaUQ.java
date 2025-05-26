@@ -1,20 +1,27 @@
 package co.edu.uniquindio.alquiler.model;
 
+import co.edu.uniquindio.alquiler.enums.EstadoProducto;
 import co.edu.uniquindio.alquiler.exceptions.ContraseniaException;
 import co.edu.uniquindio.alquiler.exceptions.CorreoInvalidoException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TiendaUQ {
 
 
     private ArrayList<Ciudadano> listaCiudadanos;
     private ArrayList<Producto> listaProductos;
+    private ArrayList<Categoria> listaCategorias;
     private static TiendaUQ tienda;
 
     private TiendaUQ(){
         this.listaCiudadanos = new ArrayList<>();
         this.listaProductos = new ArrayList<>();
+        this.listaCategorias=new ArrayList<>();
+
+        quemarDatos();
     }
 
     public static TiendaUQ getInstance(){
@@ -38,6 +45,69 @@ public class TiendaUQ {
             }
         }
         return null;
+    }
+
+    public void quemarDatos() {
+
+                // Categorías
+                Categoria cat1 = new Categoria("Electrónica", "C1");
+                Categoria cat2 = new Categoria("Hogar", "C2");
+                Categoria cat3 = new Categoria("Ropa", "C3");
+                Categoria cat4 = new Categoria("Deportes", "C4");
+                listaCategorias.add(cat2);
+                listaCategorias.add(cat3);
+                listaCategorias.add(cat4);
+                listaCategorias.add(cat1);
+
+                // Ciudadanos
+                Ciudadano ciu1 = new Ciudadano("Juan", "Pérez", "123456789", "Calle A 123", "marcela.aboncec@uqvirtual.edu.co", "1990-01-01", "pass123");
+                Ciudadano ciu2 = new Ciudadano("Lucía", "Gómez", "987654321", "Calle B 456", "lucia@example.com", "1985-06-15", "clave456");
+                Ciudadano ciu3 = new Ciudadano("Carlos", "Ramírez", "555666777", "Calle C 789", "hola", "1992-03-10", "secreto789");
+                Ciudadano ciu4 = new Ciudadano("María", "López", "222333444", "Calle D 321", "maria@example.com", "1998-12-20", "contrasena321");
+
+                listaCiudadanos.add(ciu1);
+                listaCiudadanos.add(ciu2);
+                listaCiudadanos.add(ciu3);
+                listaCiudadanos.add(ciu4);
+
+                // Productos
+                Producto prod1 = new Producto("P1", "ELEC123", "Televisor 4K", "Pantalla Ultra HD 55 pulgadas", 799.99, 10,LocalDateTime.parse("2025-05-26T14:30:00"),LocalDateTime.parse("2025-05-27T14:30:00") ,EstadoProducto.NUEVO);
+                prod1.getCategorias().add(cat1);
+                prod1.getCategorias().add(cat2);
+
+                Producto prod2 = new Producto("P2", "HOG456", "Licuadora", "Licuadora de acero inoxidable", 89.99, 25,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
+                prod2.getCategorias().add(cat1);
+                prod2.getCategorias().add(cat2);
+
+                Producto prod3 = new Producto("P3", "ROP789", "Chaqueta impermeable", "Resistente al agua y al viento", 59.90, 15,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO);
+                prod3.getCategorias().add(cat2);
+                prod3.getCategorias().add(cat3);
+                Producto prod4 = new Producto("P4", "DEP012", "Bicicleta de montaña", "Bicicleta con 21 velocidades", 299.50, 5, LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
+                prod4.getCategorias().add(cat2);
+                prod4.getCategorias().add(cat3);
+
+                listaProductos.add(prod1);
+                listaProductos.add(prod2);
+                listaProductos.add(prod3);
+                listaProductos.add(prod4);
+    }
+
+    public String validarIDDetalle(ArrayList<DetalleProducto> detallesCarrito) {
+        boolean seguir=false;
+        int aleatorio=0;
+        while(seguir)
+        {
+            aleatorio = (int)(Math.random() * 900) + 1;
+            for(int i=0;i<detallesCarrito.size();i++)
+            {
+                if (detallesCarrito.get(i).getId().equals("" + aleatorio))
+                {
+                    seguir = true;
+                }
+            }
+        }
+        return ""+aleatorio;
+
     }
 
     public ArrayList<Ciudadano> getListaCiudadanos() {
