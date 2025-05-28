@@ -12,6 +12,7 @@ public class Ciudadano {
     private String fechaNacimiento;
     private CarroCompra carrito;
     private String contrasenia;
+    private double saldo;
 
     public String getNombre() {
         return nombre;
@@ -77,7 +78,7 @@ public class Ciudadano {
         this.contrasenia = contrasenia;
     }
 
-    public Ciudadano(String nombre, String apellido, String telefono, String direccion, String email, String fechaNacimiento, String contrasenia,CarroCompra carrito) {
+    public Ciudadano(String nombre, String apellido, String telefono, String direccion, String email, String fechaNacimiento, String contrasenia,CarroCompra carrito,double saldo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -86,5 +87,14 @@ public class Ciudadano {
         this.fechaNacimiento = fechaNacimiento;
         this.carrito = carrito;
         this.contrasenia = contrasenia;
+        this.saldo=saldo;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 }

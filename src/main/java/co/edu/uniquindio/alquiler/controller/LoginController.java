@@ -79,7 +79,6 @@ public class LoginController {
 
         CompraController compras =loader.getController();
 
-        // Mostramos la nueva ventana
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

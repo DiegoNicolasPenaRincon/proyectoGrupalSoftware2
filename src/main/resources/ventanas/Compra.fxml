@@ -31,17 +31,23 @@
          </columns></TableView>
       <Label fx:id="descripcionLabel" layoutX="845.0" layoutY="51.0" text="Descripcion" />
       <TextArea fx:id="descripcionTxtArea" layoutX="754.0" layoutY="77.0" prefHeight="318.0" prefWidth="257.0" />
-      <Button fx:id="agregarCarritoButton" layoutX="352.0" layoutY="342.0" mnemonicParsing="false" onAction="#agregarCarritoOnAction" text="Agregar al carrito" />
-      <ImageView fx:id="carritoComprasImageView" fitHeight="71.0" fitWidth="80.0" layoutX="14.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/carritoCompras.png" />
-         </image></ImageView>
-      <Label fx:id="contadorElementosCarritoLbl" layoutX="78.0" layoutY="507.0" prefHeight="35.0" prefWidth="56.0" text="0" textFill="#bf4c09">
+      <Button fx:id="agregarCarritoButton" layoutX="362.0" layoutY="340.0" mnemonicParsing="false" onAction="#agregarCarritoOnAction" text="Agregar al carrito" />
+      <Label fx:id="contadorElementosCarritoLbl" layoutX="113.0" layoutY="478.0" prefHeight="35.0" prefWidth="56.0" text="0" textFill="#bf4c09">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Spinner fx:id="cantidadSpinner" layoutX="367.0" layoutY="289.0" />
       <Label fx:id="cantidadLbl" layoutX="310.0" layoutY="293.0" text="Cantidad" />
+      <Button layoutX="336.0" layoutY="389.0" mnemonicParsing="false" text="Comprar objetos del carrito" />
+      <Button fx:id="ventanaCarritoButton" layoutX="35.0" layoutY="510.0" mnemonicParsing="false" onAction="#abrirVentanaCarrito">
+       <graphic>
+           <ImageView fx:id="carritoComprasImageView" fitHeight="71.0" fitWidth="80.0" layoutX="14.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                   <Image url="@../Imagenes/carritoCompras.png" />
+               </image>
+            </ImageView>
+       </graphic>
+      </Button>
    </children>
 </AnchorPane>

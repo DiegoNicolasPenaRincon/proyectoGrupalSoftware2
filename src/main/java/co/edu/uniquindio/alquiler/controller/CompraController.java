@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class CompraController {
 
     @FXML
+    private Button ventanaCarritoButton;
+    @FXML
     private Spinner<Integer> cantidadSpinner;
     @FXML
     private Label cantidadLbl;
@@ -121,5 +123,8 @@ public class CompraController {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+    }
+
+    public void abrirVentanaCarrito(ActionEvent actionEvent) {
     }
 }
