@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="603.0" prefWidth="1032.0" style="-fx-background-color: d1f2eb;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
+<AnchorPane prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
    <children>
       <TableView fx:id="productosTable" layoutX="78.0" layoutY="77.0" prefHeight="200.0" prefWidth="676.0">
         <columns>
@@ -36,7 +36,7 @@
          <image>
             <Image url="@../Imagenes/carritoCompras.png" />
          </image></ImageView>
-      <Label fx:id="contadorElementosCarritoLbl" layoutX="69.0" layoutY="508.0" prefHeight="35.0" prefWidth="18.0" text="0">
+      <Label fx:id="contadorElementosCarritoLbl" layoutX="78.0" layoutY="507.0" prefHeight="35.0" prefWidth="56.0" text="0" textFill="#bf4c09">
          <font>
             <Font size="24.0" />
          </font>

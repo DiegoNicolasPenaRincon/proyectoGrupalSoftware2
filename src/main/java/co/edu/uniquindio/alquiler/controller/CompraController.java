@@ -96,8 +96,18 @@ public class CompraController {
             if(producto!=null)
             {
                 DetalleProducto detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,0.16* producto.getPrecio());
+                int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
+                datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
                 datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
-                contadorElementosCarritoLbl
+                String elementosAlmacenadosCarrito=""+datos.getElementosAlmacenadosCarrito();
+                if(datos.getElementosAlmacenadosCarrito()>99)
+                {
+                    contadorElementosCarritoLbl.setText("99+");
+                }
+                else
+                {
+                    contadorElementosCarritoLbl.setText(elementosAlmacenadosCarrito);
+                }
             }
             else
             {

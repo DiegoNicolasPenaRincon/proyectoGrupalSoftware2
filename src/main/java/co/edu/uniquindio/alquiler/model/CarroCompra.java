@@ -9,9 +9,6 @@ public class CarroCompra {
     private String id;
     private String codigo;
     private LocalDateTime fecha;
-    private String estado;
-    private String observaciones;
-    private String descripcion;
     private double impuesto;
     private double subtotal;
     private double total;
@@ -41,38 +38,6 @@ public class CarroCompra {
         this.fecha = fecha;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public double getImpuesto() {
-        return impuesto;
-    }
-
-    public void setImpuesto(double impuesto) {
-        this.impuesto = impuesto;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public double getSubtotal() {
         return subtotal;
     }
@@ -95,5 +60,23 @@ public class CarroCompra {
 
     public void setDetallesProducto(ArrayList<DetalleProducto> detallesProducto) {
         this.detallesProducto = detallesProducto;
+    }
+
+    public double getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public CarroCompra(String id, String codigo, LocalDateTime fecha) {
+        this.id = id;
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.impuesto = 0;
+        this.subtotal = 0;
+        this.total = 0;
+        this.detallesProducto = new ArrayList<>();
     }
 }

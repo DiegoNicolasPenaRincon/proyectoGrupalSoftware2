@@ -77,14 +77,14 @@ public class Ciudadano {
         this.contrasenia = contrasenia;
     }
 
-    public Ciudadano(String nombre, String apellido, String telefono, String direccion, String email, String fechaNacimiento, String contrasenia) {
+    public Ciudadano(String nombre, String apellido, String telefono, String direccion, String email, String fechaNacimiento, String contrasenia,CarroCompra carrito) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
-        this.carrito = null;
+        this.carrito = carrito;
         this.contrasenia = contrasenia;
     }
 }

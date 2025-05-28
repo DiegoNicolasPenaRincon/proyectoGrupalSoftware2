@@ -1,6 +1,7 @@
 package co.edu.uniquindio.alquiler.controller;
 
 import co.edu.uniquindio.alquiler.exceptions.AtributoVacioException;
+import co.edu.uniquindio.alquiler.exceptions.ContraseniaException;
 import co.edu.uniquindio.alquiler.exceptions.CorreoInvalidoException;
 import co.edu.uniquindio.alquiler.model.Ciudadano;
 import co.edu.uniquindio.alquiler.model.DatosSesion;
@@ -10,15 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class LoginController {
+    @FXML
+    private PasswordField contraseniaPassField;
     @FXML
     private Button ingresarButton;
     @FXML
@@ -27,15 +27,13 @@ public class LoginController {
     private Label contraseniaLbl;
     @FXML
     private TextField correoTxtfield;
-    @FXML
-    private TextField contraseniaTxtField;
 
     public TiendaUQ tienda= TiendaUQ.getInstance();
     public DatosSesion datos=DatosSesion.getInstance();
 
     public void ingresarOnAction(ActionEvent actionEvent) {
         String correo=correoTxtfield.getText();
-        String contrasenia=contraseniaTxtField.getText();
+        String contrasenia=contraseniaPassField.getText();
 
         try
         {
@@ -62,7 +60,7 @@ public class LoginController {
 
             }
         }
-        catch (AtributoVacioException e)
+        catch (AtributoVacioException | ContraseniaException | CorreoInvalidoException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Alerta");
