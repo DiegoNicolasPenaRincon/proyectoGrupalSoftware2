@@ -69,7 +69,7 @@ public class TiendaUQ {
         // Ciudadanos
         Ciudadano ciu1 = new Ciudadano("Juan", "Pérez", "123456789", "Calle A 123", "marcela.aboncec@uqvirtual.edu.co", "1990-01-01", "pass123",carro1,1000.00);
         Ciudadano ciu2 = new Ciudadano("Lucía", "Gómez", "987654321", "Calle B 456", "lucia@example.com", "1985-06-15", "clave456",carro2,89.99);
-        Ciudadano ciu3 = new Ciudadano("Carlos", "Ramírez", "555666777", "Calle C 789", "hola", "1992-03-10", "secreto789",carro3,50.00);
+        Ciudadano ciu3 = new Ciudadano("Carlos", "Ramírez", "555666777", "Calle C 789", "diegon.penar@uqvirtual.edu.co", "1992-03-10", "secreto789",carro3,50.00);
         Ciudadano ciu4 = new Ciudadano("María", "López", "222333444", "Calle D 321", "maria@example.com", "1998-12-20", "contrasena321",carro4,250.00);
 
         listaCiudadanos.add(ciu1);
