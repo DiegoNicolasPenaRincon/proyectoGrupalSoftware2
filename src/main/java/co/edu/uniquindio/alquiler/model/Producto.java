@@ -17,7 +17,6 @@ public class Producto {
     private LocalDateTime garantiaInicio;
     private LocalDateTime garantiaFin;
     private EstadoProducto estado;
-    private List<DetalleProducto> detallesProducto;
 
     public String getId() {
         return id;
@@ -92,13 +91,6 @@ public class Producto {
         this.estado = estado;
     }
 
-    public List<DetalleProducto> getDetallesProducto() {
-        return detallesProducto;
-    }
-
-    public void setDetallesProducto(List<DetalleProducto> detallesProducto) {
-        this.detallesProducto = detallesProducto;
-    }
 
     public ArrayList<Categoria> getCategorias() {
         return categorias;
@@ -119,6 +111,5 @@ public class Producto {
         this.garantiaInicio = garantiaInicio;
         this.garantiaFin = garantiaFin;
         this.estado = estado;
-        this.detallesProducto = new ArrayList<>();
     }
 }

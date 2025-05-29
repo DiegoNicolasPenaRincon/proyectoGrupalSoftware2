@@ -1,5 +1,7 @@
 package co.edu.uniquindio.alquiler.model;
 
+import javafx.fxml.FXML;
+
 public class DetalleProducto {
 
     private String id;
@@ -7,13 +9,17 @@ public class DetalleProducto {
     private double monto;
     private double impuesto;
     private double subtotal;
+    private String nombreProducto;
+    private String codigoProducto;
 
-    public DetalleProducto(String id, int cantidad, double monto, double impuesto, double subtotal) {
+    public DetalleProducto(String id, int cantidad, double monto, double impuesto, double subtotal,String nombreProducto,String codigoProducto) {
         this.id = id;
         this.cantidad = cantidad;
         this.monto = monto;
         this.impuesto = impuesto;
         this.subtotal = subtotal;
+        this.nombreProducto = nombreProducto;
+        this.codigoProducto = codigoProducto;
     }
 
     public String getId() {
@@ -54,5 +60,27 @@ public class DetalleProducto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getCodigoProducto() {
+        return codigoProducto;
+    }
+
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
+    }
+
+    @Override
+
+    public String toString() {
+        return nombreProducto+" "+codigoProducto;
     }
 }

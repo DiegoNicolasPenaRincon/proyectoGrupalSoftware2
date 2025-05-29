@@ -127,6 +127,26 @@ public class TiendaUQ {
 
     }
 
+    public DetalleProducto verificarProductoYaAgregado (Producto producto,ArrayList<DetalleProducto> detallesCarrito) {
+        for(int i=0;i<detallesCarrito.size();i++)
+        {
+            if(producto.getId().equals(detallesCarrito.get(i).getId()))
+            {
+                return detallesCarrito.get(i);
+            }
+        }
+        return null;
+    }
+
+
+    public ArrayList<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public void setListaCategorias(ArrayList<Categoria> listaCategorias) {
+        this.listaCategorias = listaCategorias;
+    }
+
     public ArrayList<Ciudadano> getListaCiudadanos() {
         return listaCiudadanos;
     }

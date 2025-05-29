@@ -22,6 +22,18 @@ import java.util.ArrayList;
 public class CompraController {
 
     @FXML
+    private TableView<DetalleProducto> carritoTable;
+    @FXML
+    private TableColumn<DetalleProducto,String> nombreCarritoColumn;
+    @FXML
+    private TableColumn<DetalleProducto,String>  codigoCarritoColumn;
+    @FXML
+    private Label elementosCarritoLbl;
+    @FXML
+    private Label precioTotalLbl;
+    @FXML
+    private Label precioTotalMostrarLbl;
+    @FXML
     private Label saldoCiudadanoLabel;
     @FXML
     private Button comprarObjetosCarrito;
@@ -70,8 +82,6 @@ public class CompraController {
 
     public DatosSesion datos=DatosSesion.getInstance();
 
-    int elementosEnCarrito=0;
-
     public void initialize() {
         descripcionTxtArea.setDisable(true);
         carrito=new Button("Click", carritoComprasImageView);
@@ -84,6 +94,9 @@ public class CompraController {
         iGarantiaolumn.setCellValueFactory( cellData -> new SimpleStringProperty( String.valueOf(cellData.getValue().getGarantiaInicio())));
         fGarantiaColumn.setCellValueFactory( cellData -> new SimpleStringProperty( String.valueOf(cellData.getValue().getGarantiaFin())));
         estadoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( String.valueOf(cellData.getValue().getEstado()) ) );
+
+        nombreCarritoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombreProducto()));
+        codigoCarritoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getCodigoProducto()));
 
         productosTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             Producto producto=productosTable.getSelectionModel().getSelectedItem();
@@ -103,6 +116,8 @@ public class CompraController {
         categoriaColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombre()));
 
         this.productosTable.setItems(FXCollections.observableList(tienda.getListaProductos()));
+
+        this.carritoTable.setItems(FXCollections.observableList(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()));
     }
 
     public void agregarCarritoOnAction(ActionEvent actionEvent) {
@@ -111,11 +126,23 @@ public class CompraController {
         {
             if(producto!=null)
             {
-                DetalleProducto detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio());
+                String nombre=producto.getNombre();
+                String codigo=producto.getCodigo();
+                DetalleProducto detalle=tienda.verificarProductoYaAgregado(producto,datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto());
+                if(detalle!=null)
+                {
+                    detalle.setCantidad(detalle.getCantidad()+cantidadSpinner.getValue());
+                }
+                else
+                {
+                    detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio(),nombre,codigo);
+                }
                 int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
                 datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
                 datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
                 String elementosAlmacenadosCarrito=""+datos.getElementosAlmacenadosCarrito();
+                producto.setStock(producto.getStock()-cantidadSpinner.getValue());
+                datos.getCiudadanoSeleccionado().getCarrito().setTotal(datos.getCiudadanoSeleccionado().getCarrito().getTotal()+detalle.getSubtotal());
                 if(datos.getElementosAlmacenadosCarrito()>99)
                 {
                     contadorElementosCarritoLbl.setText("99+");
@@ -124,6 +151,11 @@ public class CompraController {
                 {
                     contadorElementosCarritoLbl.setText(elementosAlmacenadosCarrito);
                 }
+
+                productosTable.refresh();
+                carritoTable.refresh();
+
+                precioTotalMostrarLbl.setText(""+Double.parseDouble(precioTotalMostrarLbl.getText())+datos.getCiudadanoSeleccionado().getCarrito().getTotal());
             }
             else
             {
@@ -139,21 +171,6 @@ public class CompraController {
         }
     }
 
-    public void abrirVentanaCarrito(ActionEvent actionEvent) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/CarritoComprasVentana.fxml"));
-        Parent root = loader.load();
-
-        CarritosCompraController carritosCompraController = loader.getController();
-
-        // Mostramos la nueva ventana
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Carrito de compras");
-        stage.show();
-
-         */
-    }
 
     public void comprarObjetosOnAction(ActionEvent actionEvent) {
         try
@@ -176,6 +193,11 @@ public class CompraController {
                    datos.getCiudadanoSeleccionado().setSaldo(datos.getCiudadanoSeleccionado().getSaldo()-costoTotal);
                    saldoLabel.setText(""+datos.getCiudadanoSeleccionado().getSaldo());
                    contadorElementosCarritoLbl.setText("0");
+                   datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().clear();
+                   carritoTable.refresh();
+                   productosTable.refresh();
+                   datos.getCiudadanoSeleccionado().getCarrito().setTotal(0.0);
+                   precioTotalMostrarLbl.setText("0.0");
                }
 
             }
