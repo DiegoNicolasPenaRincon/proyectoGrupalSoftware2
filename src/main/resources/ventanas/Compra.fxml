@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
+<AnchorPane prefHeight="603.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.alquiler.controller.CompraController">
    <children>
       <TableView fx:id="productosTable" layoutX="78.0" layoutY="77.0" prefHeight="200.0" prefWidth="676.0">
         <columns>
@@ -40,7 +40,7 @@
       </Label>
       <Spinner fx:id="cantidadSpinner" layoutX="367.0" layoutY="289.0" />
       <Label fx:id="cantidadLbl" layoutX="310.0" layoutY="293.0" text="Cantidad" />
-      <Button fx:id="comprarObjetosCarrito" layoutX="309.0" layoutY="564.0" mnemonicParsing="false" onAction="#comprarObjetosOnAction" text="Comprar objetos del carrito" />
+      <Button fx:id="comprarObjetosCarrito" layoutX="404.0" layoutY="564.0" mnemonicParsing="false" onAction="#comprarObjetosOnAction" text="Comprar objetos del carrito" />
       <Label fx:id="saldoCiudadanoLabel" layoutX="35.0" layoutY="26.0" text="Tu saldo:" textFill="#bf4c09">
          <font>
             <Font size="24.0" />
@@ -56,20 +56,21 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="precioTotalLbl" layoutX="309.0" layoutY="395.0" prefHeight="26.0" prefWidth="95.0" text="Precio total:" textFill="#bf4c09">
+      <Label fx:id="precioTotalLbl" layoutX="383.0" layoutY="395.0" prefHeight="26.0" prefWidth="95.0" text="Precio total:" textFill="#bf4c09">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="precioTotalMostrarLbl" layoutX="404.0" layoutY="395.0" prefHeight="26.0" prefWidth="333.0" text="0.0" textFill="#bf4c09">
+      <Label fx:id="precioTotalMostrarLbl" layoutX="485.0" layoutY="395.0" prefHeight="26.0" prefWidth="224.0" text="0.0" textFill="#bf4c09">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="carritoTable" layoutX="3.0" layoutY="400.0" prefHeight="200.0" prefWidth="284.0">
+      <TableView fx:id="carritoTable" layoutX="3.0" layoutY="400.0" prefHeight="200.0" prefWidth="365.0">
         <columns>
-          <TableColumn fx:id="nombreCarritoColumn" prefWidth="124.0" text="Nombre producto" />
-          <TableColumn fx:id="codigoCarritoColumn" prefWidth="159.0" text="Codigo producto" />
+          <TableColumn fx:id="nombreCarritoColumn" prefWidth="124.0" text="Nombre" />
+          <TableColumn fx:id="codigoCarritoColumn" prefWidth="159.0" text="Codigo" />
+            <TableColumn fx:id="cantidadColumn" prefWidth="81.0" text="Cantidad" />
         </columns>
       </TableView>
    </children>

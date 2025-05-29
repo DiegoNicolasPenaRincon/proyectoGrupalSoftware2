@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class CompraController {
 
     @FXML
+    private TableColumn<DetalleProducto,String> cantidadColumn;
+    @FXML
     private TableView<DetalleProducto> carritoTable;
     @FXML
     private TableColumn<DetalleProducto,String> nombreCarritoColumn;
@@ -82,6 +84,8 @@ public class CompraController {
 
     public DatosSesion datos=DatosSesion.getInstance();
 
+    private double PrecioTotal=0.0;
+
     public void initialize() {
         descripcionTxtArea.setDisable(true);
         carrito=new Button("Click", carritoComprasImageView);
@@ -97,6 +101,7 @@ public class CompraController {
 
         nombreCarritoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombreProducto()));
         codigoCarritoColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getCodigoProducto()));
+        cantidadColumn.setCellValueFactory( cellData -> new SimpleStringProperty( String.valueOf(cellData.getValue().getCantidad())));
 
         productosTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             Producto producto=productosTable.getSelectionModel().getSelectedItem();
@@ -135,11 +140,11 @@ public class CompraController {
                 }
                 else
                 {
-                    detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio(),nombre,codigo);
+                    detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio()*cantidadSpinner.getValue(),nombre,codigo);
+                    datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
                 }
                 int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
                 datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
-                datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
                 String elementosAlmacenadosCarrito=""+datos.getElementosAlmacenadosCarrito();
                 producto.setStock(producto.getStock()-cantidadSpinner.getValue());
                 datos.getCiudadanoSeleccionado().getCarrito().setTotal(datos.getCiudadanoSeleccionado().getCarrito().getTotal()+detalle.getSubtotal());
@@ -155,7 +160,9 @@ public class CompraController {
                 productosTable.refresh();
                 carritoTable.refresh();
 
-                precioTotalMostrarLbl.setText(""+Double.parseDouble(precioTotalMostrarLbl.getText())+datos.getCiudadanoSeleccionado().getCarrito().getTotal());
+                PrecioTotal=datos.getCiudadanoSeleccionado().getCarrito().getTotal();
+
+                precioTotalMostrarLbl.setText(""+PrecioTotal);
             }
             else
             {
@@ -197,7 +204,7 @@ public class CompraController {
                    carritoTable.refresh();
                    productosTable.refresh();
                    datos.getCiudadanoSeleccionado().getCarrito().setTotal(0.0);
-                   precioTotalMostrarLbl.setText("0.0");
+                   precioTotalMostrarLbl.setText(""+PrecioTotal);
                }
 
             }

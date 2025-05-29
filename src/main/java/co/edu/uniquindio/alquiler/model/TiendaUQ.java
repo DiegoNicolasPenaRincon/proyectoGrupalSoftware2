@@ -130,8 +130,9 @@ public class TiendaUQ {
     public DetalleProducto verificarProductoYaAgregado (Producto producto,ArrayList<DetalleProducto> detallesCarrito) {
         for(int i=0;i<detallesCarrito.size();i++)
         {
-            if(producto.getId().equals(detallesCarrito.get(i).getId()))
+            if(producto.getId().equals(detallesCarrito.get(i).getCodigoProducto()))
             {
+                System.out.print(detallesCarrito.get(i).getCodigoProducto()+"  "+detallesCarrito.get(i).getNombreProducto());
                 return detallesCarrito.get(i);
             }
         }
