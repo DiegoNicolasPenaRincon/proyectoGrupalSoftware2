@@ -140,10 +140,10 @@ public class CompraController {
     }
 
     public void abrirVentanaCarrito(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/CarritoComprasVentana.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/CarritoComprasVentana.fxml"));
         Parent root = loader.load();
 
-        CarritosCompraController carritosCompraController =loader.getController();
+        CarritosCompraController carritosCompraController = loader.getController();
 
         // Mostramos la nueva ventana
         Scene scene = new Scene(root);
@@ -151,6 +151,8 @@ public class CompraController {
         stage.setScene(scene);
         stage.setTitle("Carrito de compras");
         stage.show();
+
+         */
     }
 
     public void comprarObjetosOnAction(ActionEvent actionEvent) {
