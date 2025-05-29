@@ -1,6 +1,8 @@
 package co.edu.uniquindio.alquiler.controller;
 
 import co.edu.uniquindio.alquiler.exceptions.AtributoVacioException;
+import co.edu.uniquindio.alquiler.exceptions.CarritoException;
+import co.edu.uniquindio.alquiler.exceptions.SaldoException;
 import co.edu.uniquindio.alquiler.model.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,6 +16,12 @@ import java.util.ArrayList;
 
 public class CompraController {
 
+    @FXML
+    private Label saldoCiudadanoLabel;
+    @FXML
+    private Button comprarObjetosCarrito;
+    @FXML
+    private Label saldoLabel;
     @FXML
     private Button ventanaCarritoButton;
     @FXML
@@ -83,8 +91,9 @@ public class CompraController {
                 cantidadSpinner.setValueFactory(valueFactory);
 
             }
-        });
 
+        });
+        saldoLabel.setText(""+datos.getCiudadanoSeleccionado().getSaldo());
 
         categoriaColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombre()));
 
@@ -97,7 +106,7 @@ public class CompraController {
         {
             if(producto!=null)
             {
-                DetalleProducto detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,0.16* producto.getPrecio());
+                DetalleProducto detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio());
                 int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
                 datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
                 datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
@@ -126,5 +135,44 @@ public class CompraController {
     }
 
     public void abrirVentanaCarrito(ActionEvent actionEvent) {
+        
+    }
+
+    public void comprarObjetosOnAction(ActionEvent actionEvent) {
+        try
+        {
+            double costoTotal=0;
+            CarroCompra carritoCiudadano=datos.getCiudadanoSeleccionado().getCarrito();
+            if(!carritoCiudadano.getDetallesProducto().isEmpty())
+            {
+               for(int i=0;i<carritoCiudadano.getDetallesProducto().size();i++)
+               {
+                   costoTotal+=carritoCiudadano.getDetallesProducto().get(i).getSubtotal()*carritoCiudadano.getDetallesProducto().get(i).getCantidad();
+                   System.out.println(costoTotal);
+               }
+               if(datos.getCiudadanoSeleccionado().getSaldo()<costoTotal)
+               {
+                   throw new SaldoException("No tiene el saldo suficiente para realizar esa compra");
+               }
+               else
+               {
+                   datos.getCiudadanoSeleccionado().setSaldo(datos.getCiudadanoSeleccionado().getSaldo()-costoTotal);
+                   saldoLabel.setText(""+datos.getCiudadanoSeleccionado().getSaldo());
+                   contadorElementosCarritoLbl.setText("0");
+               }
+
+            }
+            else
+            {
+                throw new CarritoException("Ingrese por lo menos un producto al carrito");
+            }
+        }
+        catch (NullPointerException | SaldoException | CarritoException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Alerta");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        }
     }
 }

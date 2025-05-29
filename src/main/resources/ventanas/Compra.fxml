@@ -29,7 +29,10 @@
          <columns>
             <TableColumn fx:id="categoriaColumn" prefWidth="256.0" text="Categoria" />
          </columns></TableView>
-      <Label fx:id="descripcionLabel" layoutX="845.0" layoutY="51.0" text="Descripcion" />
+      <Label fx:id="descripcionLabel" layoutX="833.0" layoutY="44.0" text="Descripcion">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
       <TextArea fx:id="descripcionTxtArea" layoutX="754.0" layoutY="77.0" prefHeight="318.0" prefWidth="257.0" />
       <Button fx:id="agregarCarritoButton" layoutX="362.0" layoutY="340.0" mnemonicParsing="false" onAction="#agregarCarritoOnAction" text="Agregar al carrito" />
       <Label fx:id="contadorElementosCarritoLbl" layoutX="113.0" layoutY="478.0" prefHeight="35.0" prefWidth="56.0" text="0" textFill="#bf4c09">
@@ -49,5 +52,15 @@
             </ImageView>
        </graphic>
       </Button>
+      <Label fx:id="saldoCiudadanoLabel" layoutX="35.0" layoutY="26.0" text="Tu saldo:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="saldoLabel" layoutX="135.0" layoutY="26.0" prefHeight="35.0" prefWidth="248.0" text="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

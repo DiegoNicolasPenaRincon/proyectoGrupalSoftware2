@@ -78,18 +78,18 @@ public class TiendaUQ {
         listaCiudadanos.add(ciu4);
 
         // Productos
-        Producto prod1 = new Producto("P1", "ELEC123", "Televisor 4K", "Pantalla Ultra HD 55 pulgadas", 799.99, 10,LocalDateTime.parse("2025-05-26T14:30:00"),LocalDateTime.parse("2025-05-27T14:30:00") ,EstadoProducto.NUEVO);
+        Producto prod1 = new Producto("P1", "ELEC123", "Televisor 4K", "Pantalla Ultra HD 55 pulgadas", (799.99*0.16)+799.99, 10,LocalDateTime.parse("2025-05-26T14:30:00"),LocalDateTime.parse("2025-05-27T14:30:00") ,EstadoProducto.NUEVO);
         prod1.getCategorias().add(cat1);
         prod1.getCategorias().add(cat2);
 
-        Producto prod2 = new Producto("P2", "HOG456", "Licuadora", "Licuadora de acero inoxidable", 89.99, 99,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
+        Producto prod2 = new Producto("P2", "HOG456", "Licuadora", "Licuadora de acero inoxidable", (89.99*0.16)+89.99, 99,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
         prod2.getCategorias().add(cat1);
         prod2.getCategorias().add(cat2);
 
-        Producto prod3 = new Producto("P3", "ROP789", "Chaqueta impermeable", "Resistente al agua y al viento", 59.90, 15,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO);
+        Producto prod3 = new Producto("P3", "ROP789", "Chaqueta impermeable", "Resistente al agua y al viento", (59.99*0.16)+59.99, 15,LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO);
         prod3.getCategorias().add(cat2);
         prod3.getCategorias().add(cat3);
-        Producto prod4 = new Producto("P4", "DEP012", "Bicicleta de montaña", "Bicicleta con 21 velocidades", 299.50, 5, LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
+        Producto prod4 = new Producto("P4", "DEP012", "Bicicleta de montaña", "Bicicleta con 21 velocidades", (299.50*0.16)+299.50, 5, LocalDateTime.parse("2024-10-26T14:30:00"),LocalDateTime.parse("2026-10-26T14:30:00") ,EstadoProducto.USADO );
         prod4.getCategorias().add(cat2);
         prod4.getCategorias().add(cat3);
 
