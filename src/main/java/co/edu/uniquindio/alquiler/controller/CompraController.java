@@ -8,10 +8,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CompraController {
@@ -134,8 +139,18 @@ public class CompraController {
         }
     }
 
-    public void abrirVentanaCarrito(ActionEvent actionEvent) {
-        
+    public void abrirVentanaCarrito(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/CarritoComprasVentana.fxml"));
+        Parent root = loader.load();
+
+        CarritosCompraController carritosCompraController =loader.getController();
+
+        // Mostramos la nueva ventana
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Carrito de compras");
+        stage.show();
     }
 
     public void comprarObjetosOnAction(ActionEvent actionEvent) {

@@ -16,7 +16,7 @@ public class ProyectoGrupalApp extends Application {
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Comprar");
+        stage.setTitle("Logueo");
         stage.show();
 
 

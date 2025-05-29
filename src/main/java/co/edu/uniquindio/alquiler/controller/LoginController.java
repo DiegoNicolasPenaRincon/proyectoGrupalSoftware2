@@ -82,6 +82,7 @@ public class LoginController {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Compras");
         stage.show();
     }
 }
