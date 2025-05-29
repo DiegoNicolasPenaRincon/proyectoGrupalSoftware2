@@ -3,8 +3,11 @@ package co.edu.uniquindio.alquiler.controller;
 import co.edu.uniquindio.alquiler.exceptions.AtributoVacioException;
 import co.edu.uniquindio.alquiler.exceptions.CarritoException;
 import co.edu.uniquindio.alquiler.exceptions.SaldoException;
+import co.edu.uniquindio.alquiler.exceptions.StockException;
 import co.edu.uniquindio.alquiler.model.*;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,11 +115,11 @@ public class CompraController {
                 SpinnerValueFactory<Integer> valueFactory =
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, producto.getStock(),1);
                 cantidadSpinner.setValueFactory(valueFactory);
-
             }
 
         });
         saldoLabel.setText(""+datos.getCiudadanoSeleccionado().getSaldo());
+
 
         categoriaColumn.setCellValueFactory( cellData -> new SimpleStringProperty( cellData.getValue().getNombre()));
 
@@ -131,45 +134,53 @@ public class CompraController {
         {
             if(producto!=null)
             {
-                String nombre=producto.getNombre();
-                String codigo=producto.getCodigo();
-                DetalleProducto detalle=tienda.verificarProductoYaAgregado(producto,datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto());
-                if(detalle!=null)
+                if(producto.getStock()>=cantidadSpinner.getValue())
                 {
-                    detalle.setCantidad(detalle.getCantidad()+cantidadSpinner.getValue());
+                    String nombre=producto.getNombre();
+                    String codigo=producto.getCodigo();
+                    DetalleProducto detalle=tienda.verificarProductoYaAgregado(producto,datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto());
+                    if(detalle!=null)
+                    {
+                        detalle.setCantidad(detalle.getCantidad()+cantidadSpinner.getValue());
+                    }
+                    else
+                    {
+                        detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio()*cantidadSpinner.getValue(),nombre,codigo);
+                        datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
+                    }
+                    int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
+                    datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
+                    String elementosAlmacenadosCarrito=""+datos.getElementosAlmacenadosCarrito();
+                    producto.setStock(producto.getStock()-cantidadSpinner.getValue());
+                    datos.getCiudadanoSeleccionado().getCarrito().setTotal(datos.getCiudadanoSeleccionado().getCarrito().getTotal()+detalle.getSubtotal());
+                    if(datos.getElementosAlmacenadosCarrito()>99)
+                    {
+                        contadorElementosCarritoLbl.setText("99+");
+                    }
+                    else
+                    {
+                        contadorElementosCarritoLbl.setText(elementosAlmacenadosCarrito);
+                    }
+
+                    productosTable.refresh();
+                    carritoTable.refresh();
+
+                    PrecioTotal=datos.getCiudadanoSeleccionado().getCarrito().getTotal();
+
+                    precioTotalMostrarLbl.setText(""+PrecioTotal);
                 }
                 else
                 {
-                    detalle=new DetalleProducto(tienda.validarIDDetalle(datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto()),cantidadSpinner.getValue(),producto.getPrecio(),0.16,producto.getPrecio()*cantidadSpinner.getValue(),nombre,codigo);
-                    datos.getCiudadanoSeleccionado().getCarrito().getDetallesProducto().add(detalle);
-                }
-                int cantidadActualCarrito= datos.getElementosAlmacenadosCarrito();
-                datos.setElementosAlmacenadosCarrito(cantidadActualCarrito+cantidadSpinner.getValue());
-                String elementosAlmacenadosCarrito=""+datos.getElementosAlmacenadosCarrito();
-                producto.setStock(producto.getStock()-cantidadSpinner.getValue());
-                datos.getCiudadanoSeleccionado().getCarrito().setTotal(datos.getCiudadanoSeleccionado().getCarrito().getTotal()+detalle.getSubtotal());
-                if(datos.getElementosAlmacenadosCarrito()>99)
-                {
-                    contadorElementosCarritoLbl.setText("99+");
-                }
-                else
-                {
-                    contadorElementosCarritoLbl.setText(elementosAlmacenadosCarrito);
+                    throw new StockException("No hay stock de este producto");
                 }
 
-                productosTable.refresh();
-                carritoTable.refresh();
-
-                PrecioTotal=datos.getCiudadanoSeleccionado().getCarrito().getTotal();
-
-                precioTotalMostrarLbl.setText(""+PrecioTotal);
             }
             else
             {
                 throw new AtributoVacioException("Debe seleccionar algun producto");
             }
         }
-        catch(AtributoVacioException e)
+        catch(AtributoVacioException|StockException e)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Alerta");
@@ -220,5 +231,6 @@ public class CompraController {
             alert.setContentText(e.getMessage());
             alert.show();
         }
+
     }
 }
